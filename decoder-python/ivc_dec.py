@@ -31,8 +31,8 @@ C = [
     [98, -237, 237, -98, -98, 237, -237, 98],
     [50, -142, 213, -251, 251, -213, 142, -50],
 ]
-FWD_SHIFT = 20
-INV_SHIFT = 16
+FWD_SHIFT = 21
+INV_SHIFT = 15
 
 QM = [
     [16, 16, 16, 16, 17, 18, 21, 24],
@@ -240,9 +240,15 @@ def main():
 
     data = open(path, "rb").read()
     total = len(data) * 8
-    limit = min(bit_len, total) if bit_len is not None else total
-    b = Bits(data, limit)
+    # The 79-bit header must be whole in the file; a --bits cut applies to the
+    # payload only, so a transfer cut before the first block still leaves the
+    # image dimensions readable.  This mirrors the JS decoder.
+    if total < HEADER_BITS:
+        raise SystemExit("file shorter than the %d-bit header" % HEADER_BITS)
+    b = Bits(data, total)
     hdr = parse_header(b)
+    limit = min(bit_len, total) if bit_len is not None else total
+    b.n = limit
     W, H, qbase, lossless = hdr["W"], hdr["H"], hdr["qbase"], hdr["lossless"]
     CW, CH = (W + 7) // 8, (H + 7) // 8
     PW, PH = CW * 8, CH * 8

@@ -1,0 +1,32 @@
+{
+  "name": "minimal",
+  "description": "Smallest documented example: one 8x8 block, one non-zero level (DC=16).",
+  "headerBits": 79,
+  "totalBits": 96,
+  "byteLength": 12,
+  "fields": {
+    "qsel": {
+      "start": 79,
+      "end": 81
+    },
+    "mode": {
+      "start": 81,
+      "end": 84
+    },
+    "numAC": {
+      "start": 84,
+      "end": 85
+    },
+    "dc": {
+      "start": 85,
+      "end": 96
+    },
+    "ac": [],
+    "end": 96
+  },
+  "levels": [
+    16
+  ],
+  "bits": "00000100 00011111 1",
+  "hex": "000000  49 56 43 31 10 07 00 70 f0 00 08 3f"
+}

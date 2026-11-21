@@ -1,0 +1,150 @@
+{
+  "name": "shared-edge",
+  "description": "Two horizontally adjacent 8x8 blocks. Block 0 ends on a byte boundary with a negative AC level; block 1 predicts from block 0's right column.",
+  "coefficients": [
+    {
+      "block": 0,
+      "qsel": 0,
+      "mode": 0,
+      "dc": -3,
+      "ac": [
+        -4,
+        -3
+      ]
+    },
+    {
+      "block": 1,
+      "qsel": 0,
+      "mode": 2,
+      "dc": 2,
+      "ac": []
+    }
+  ],
+  "layout": {
+    "headerBits": 79,
+    "totalBits": 123,
+    "byteLength": 16,
+    "blocks": [
+      {
+        "block": 0,
+        "startBit": 79,
+        "endBit": 112,
+        "mode": 0,
+        "qsel": 0,
+        "published": true,
+        "fields": {
+          "qsel": {
+            "start": 79,
+            "end": 81
+          },
+          "mode": {
+            "start": 81,
+            "end": 84
+          },
+          "numAC": {
+            "start": 84,
+            "end": 89
+          },
+          "dc": {
+            "start": 89,
+            "end": 96
+          },
+          "ac": [
+            {
+              "start": 96,
+              "end": 105
+            },
+            {
+              "start": 105,
+              "end": 112
+            }
+          ],
+          "end": 112
+        }
+      },
+      {
+        "block": 1,
+        "startBit": 112,
+        "endBit": 123,
+        "mode": 2,
+        "qsel": 0,
+        "published": true,
+        "fields": {
+          "qsel": {
+            "start": 112,
+            "end": 114
+          },
+          "mode": {
+            "start": 114,
+            "end": 117
+          },
+          "numAC": {
+            "start": 117,
+            "end": 118
+          },
+          "dc": {
+            "start": 118,
+            "end": 123
+          },
+          "ac": [],
+          "end": 123
+        }
+      }
+    ]
+  },
+  "block0LastCoefficient": {
+    "z": 2,
+    "level": -3,
+    "bitRange": {
+      "start": 105,
+      "end": 112
+    }
+  },
+  "damage": {
+    "missingLastByte": {
+      "status": "truncated",
+      "byteCount": 15,
+      "failureIndex": 1,
+      "failureBit": 120,
+      "reportedInsideByte": 15,
+      "intactEndByte": 15,
+      "checkedBitLength": 120
+    },
+    "misalignedMarker": {
+      "status": "truncated",
+      "byteCount": 16,
+      "failureIndex": 1,
+      "failureBit": 128,
+      "reportedInsideByte": 16
+    },
+    "sharedEdgeFlip": {
+      "flippedBit": 109,
+      "block0RangeChanged": true,
+      "block1TokenUnchanged": true,
+      "block1RangeUnchanged": true,
+      "wrongPixel": {
+        "x": 8,
+        "y": 0,
+        "intact": 132,
+        "flipped": 160
+      },
+      "decodeStillOk": true,
+      "firstDifferenceBit": 109,
+      "sourceBlock": 0
+    }
+  },
+  "unknownVersion": {
+    "status": "unknown-version",
+    "bitRange": {
+      "start": 32,
+      "end": 36
+    },
+    "bits": "0010"
+  },
+  "bits": {
+    "block0": "00000001 10000111 00000110 00000111 0",
+    "block1": "00010100 111",
+    "header": "01001001 01010110 01000011 00110001 00010000 00001111 00000000 01110000 11110000 0000000",
+    "hex": "000000  49 56 43 31 10 0f 00 70 f0 00 03 0e 0c 0e 14 e0"
+  }
+}
